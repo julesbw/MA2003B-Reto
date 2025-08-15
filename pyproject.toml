@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "MA2003B-Reto"
+version = "0.1.0"
+description = "Un proyecto de ciencia de datos para SIMA"
+requires-python = ">=3.11"
+
+# Dependencias base
+dependencies = [
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "matplotlib>=3.8",
+]
+
+# (Opcional)
+# No se instalan a menos que se pidan explícitamente.
+[project.optional-dependencies]
+notebook = [
+  "jupyterlab>=4",
+  "ipykernel>=6",
+]

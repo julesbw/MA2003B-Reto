@@ -1,0 +1,48 @@
+# Entorno virtual
+.venv/
+env/
+venv/
+
+# Archivos de Python compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de configuración locales
+*.env
+*.local
+
+# Archivos de Jupyter temporales
+.ipynb_checkpoints/
+
+# Archivos de datos pesados
+datos/
+*.csv
+*.tsv
+*.xls
+*.xlsx
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+
+# Archivos de salida y caché
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+
+# Archivos de paquetes y build
+*.egg-info/
+dist/
+build/
+
+# Configuración específica de VS Code
+.vscode/
+
+# Otros posibles directorios de cache
+.cache/
