@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mapas de calidad del aire – índice</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #121a33;
+        --muted: #9fb0d3;
+        --accent: #4da3ff;
+        --ok: #2ecc71;
+        --warn: #ff9f43;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, Inter, Arial;
+        color: #e8eeff;
+        background: linear-gradient(180deg, #0b1020, #0e1430 30%, #0c1228);
+        min-height: 100vh;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(11, 16, 32, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 14px 16px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 12px 0 0;
+        letter-spacing: 0.2px;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      select {
+        appearance: none;
+        background: var(--card);
+        color: #eef4ff;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 14px;
+        outline: none;
+      }
+      .btn {
+        background: var(--accent);
+        color: #081123;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .meta {
+        margin-left: auto;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      main {
+        max-width: 1100px;
+        margin: 14px auto;
+        padding: 0 16px 16px;
+      }
+      .frameWrap {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      iframe {
+        width: 100%;
+        height: 72vh;
+        border: 0;
+        background: #fff;
+      }
+      .status {
+        padding: 12px 14px;
+        font-size: 14px;
+        border-left: 4px solid transparent;
+      }
+      .status.ok {
+        background: rgba(46, 204, 113, 0.08);
+        border-color: var(--ok);
+      }
+      .status.warn {
+        background: rgba(255, 159, 67, 0.1);
+        border-color: var(--warn);
+      }
+      footer {
+        max-width: 1100px;
+        margin: 10px auto 30px;
+        padding: 0 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      a {
+        color: #b6d6ff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <h1>Mapas interactivos</h1>
+        <div class="controls">
+          <div>
+            <label for="year">Año</label><br />
+            <select id="year"></select>
+          </div>
+          <div>
+            <label for="pol">Contaminante</label><br />
+            <select id="pol"></select>
+          </div>
+          <button
+            id="openTab"
+            class="btn"
+            title="Abrir el mapa en una pestaña nueva"
+          >
+            Abrir en pestaña
+          </button>
+        </div>
+        <div class="meta" id="meta"></div>
+      </div>
+    </header>
+
+    <main>
+      <div class="frameWrap">
+        <iframe
+          id="mapFrame"
+          src="about:blank"
+          loading="eager"
+          referrerpolicy="no-referrer"
+        ></iframe>
+      </div>
+      <div id="msg" class="status" style="display: none"></div>
+    </main>
+
+    <footer>
+      <p>
+        Los archivos deben existir con el patrón
+        <code>mapas_html/mapa_{POL}_{AÑO}.html</code>, por ejemplo:
+        <code>mapa_PM10_2024.html</code>, <code>mapa_O3_2020.html</code>.
+      </p>
+    </footer>
+
+    <script>
+      (() => {
+        // === Configura aquí si cambias carpeta o nombres ===
+        const MAPS_DIR = "mapas_html"; // carpeta junto a este index.html
+        const YEARS = [2020, 2024];
+        // [valorArchivo, etiqueta]
+        const POLLS = [
+          ["PM10", "PM10"],
+          ["PM25", "PM2.5"],
+          ["O3", "O₃"],
+        ];
+
+        const $year = document.getElementById("year");
+        const $pol = document.getElementById("pol");
+        const $frame = document.getElementById("mapFrame");
+        const $msg = document.getElementById("msg");
+        const $meta = document.getElementById("meta");
+        const $open = document.getElementById("openTab");
+
+        // poblar selects
+        YEARS.forEach((y) =>
+          $year.insertAdjacentHTML(
+            "beforeend",
+            `<option value="${y}">${y}</option>`
+          )
+        );
+        POLLS.forEach(([k, label]) =>
+          $pol.insertAdjacentHTML(
+            "beforeend",
+            `<option value="${k}">${label}</option>`
+          )
+        );
+
+        // lee hash ?year=2024&pol=PM10
+        const q = new URLSearchParams(location.hash.replace("#", ""));
+        const initYear = parseInt(q.get("year")) || YEARS[YEARS.length - 1];
+        const initPol = q.get("pol") || POLLS[0][0];
+        $year.value = YEARS.includes(initYear) ? initYear : YEARS[0];
+        $pol.value = POLLS.map((p) => p[0]).includes(initPol)
+          ? initPol
+          : POLLS[0][0];
+
+        function filename(pol, year) {
+          return `${MAPS_DIR}/mapa_${pol}_${year}.html`;
+        }
+        function setStatus(kind, text) {
+          $msg.className = `status ${kind}`;
+          $msg.textContent = text;
+          $msg.style.display = "block";
+        }
+        function clearStatus() {
+          $msg.style.display = "none";
+        }
+
+        async function loadMap() {
+          const pol = $pol.value;
+          const year = $year.value;
+          const url = filename(pol, year);
+          // Expone en la UI
+          $meta.textContent = `${pol} – ${year}`;
+          // Actualiza hash para compartir enlace
+          history.replaceState(null, "", `#year=${year}&pol=${pol}`);
+          clearStatus();
+          try {
+            const res = await fetch(url, { method: "HEAD", cache: "no-store" });
+            if (!res.ok) {
+              setStatus(
+                "warn",
+                `No encontré el archivo: ${url}. Genera ese mapa y vuelve a intentar.`
+              );
+              $frame.src = "about:blank";
+              $open.disabled = true;
+              $open.onclick = null;
+              return;
+            }
+            $frame.src = url;
+            $open.disabled = false;
+            $open.onclick = () => window.open(url, "_blank");
+          } catch (err) {
+            setStatus(
+              "warn",
+              "No se pudo cargar el archivo (¿ruta correcta? ¿servidor local?)."
+            );
+            $frame.src = "about:blank";
+            $open.disabled = true;
+            $open.onclick = null;
+          }
+        }
+
+        $year.addEventListener("change", loadMap);
+        $pol.addEventListener("change", loadMap);
+        loadMap();
+      })();
+    </script>
+  </body>
+</html>

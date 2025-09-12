@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_309b46329da047861467f50cbf1886af {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+    <h3 style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+               z-index: 9999; background: rgba(255,255,255,0.95); padding: 6px 10px;
+               border-radius: 8px; font-family: sans-serif; font-weight: 700;">
+      PM25 2020 – % de días excedidos
+    </h3>
+    
+            <div class="folium-map" id="map_309b46329da047861467f50cbf1886af" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_309b46329da047861467f50cbf1886af = L.map(
+                "map_309b46329da047861467f50cbf1886af",
+                {
+                    center: [25.68435, -100.31721],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_309b46329da047861467f50cbf1886af);
+
+            
+
+        
+    
+            var tile_layer_7ddd592b74e05832fb0128e826b7fe1d = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap contributors, \u00a9 CARTO",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_7ddd592b74e05832fb0128e826b7fe1d.addTo(map_309b46329da047861467f50cbf1886af);
+        
+    
+            var tile_layer_eb56949b980aae03c63a790d8ac00124 = L.tileLayer(
+                "Stamen Toner",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            var feature_group_6b4603ee0aad6302aa6e9c494f0aff86 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_f206f0d3eabe7e92754f6c1e23095d94 = L.heatLayer(
+                [[25.67602, -100.335847, 0.04150943396226415], [25.74543, -100.25502, 0.03076923076923077], [25.77722, -100.188055, 0.015151515151515152], [25.791343, -100.078176, 0.001], [25.75712, -100.365974, 0.005714285714285714], [25.783331, -100.585833, 0.07407407407407407], [25.80194, -100.343056, 0.012396694214876033], [25.729787, -100.310028, 0.010638297872340425], [25.575383, -100.249371, 0.001], [25.66827, -100.24958, 0.00625], [25.64611, -100.095555, 0.0375], [25.60087, -99.995334, 0.016556291390728478], [25.675356, -100.460037, 0.029069767441860465], [25.66528, -100.412778, 0.017985611510791366]],
+                {
+  "minOpacity": 0.2,
+  "maxZoom": 18,
+  "radius": 26,
+  "blur": 16,
+}
+            );
+        
+    
+            heat_map_f206f0d3eabe7e92754f6c1e23095d94.addTo(feature_group_6b4603ee0aad6302aa6e9c494f0aff86);
+        
+    
+            feature_group_6b4603ee0aad6302aa6e9c494f0aff86.addTo(map_309b46329da047861467f50cbf1886af);
+        
+    
+    var color_map_f09f686f60e1a170b7739fa2160fe1cc = {};
+
+    
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.color = d3.scale.threshold()
+              .domain([0.0, 0.014844503822459734, 0.02968900764491947, 0.0445335114673792, 0.05937801528983894, 0.07422251911229867, 0.0890670229347584, 0.10391152675721814, 0.11875603057967787, 0.13360053440213762, 0.14844503822459734, 0.16328954204705706, 0.1781340458695168, 0.19297854969197653, 0.20782305351443628, 0.22266755733689603, 0.23751206115935575, 0.25235656498181547, 0.26720106880427524, 0.28204557262673496, 0.2968900764491947, 0.3117345802716544, 0.3265790840941141, 0.3414235879165739, 0.3562680917390336, 0.37111259556149334, 0.38595709938395306, 0.40080160320641284, 0.41564610702887256, 0.4304906108513323, 0.44533511467379205, 0.4601796184962517, 0.4750241223187115, 0.48986862614117127, 0.5047131299636309, 0.5195576337860907, 0.5344021376085505, 0.5492466414310102, 0.5640911452534699, 0.5789356490759296, 0.5937801528983894, 0.6086246567208491, 0.6234691605433088, 0.6383136643657686, 0.6531581681882282, 0.668002672010688, 0.6828471758331478, 0.6976916796556075, 0.7125361834780672, 0.7273806873005271, 0.7422251911229867, 0.7570696949454464, 0.7719141987679061, 0.786758702590366, 0.8016032064128257, 0.8164477102352854, 0.8312922140577451, 0.8461367178802048, 0.8609812217026646, 0.8758257255251244, 0.8906702293475841, 0.9055147331700438, 0.9203592369925034, 0.9352037408149633, 0.950048244637423, 0.9648927484598827, 0.9797372522823425, 0.9945817561048023, 1.0094262599272619, 1.0242707637497217, 1.0391152675721813, 1.0539597713946411, 1.068804275217101, 1.0836487790395606, 1.0984932828620204, 1.11333778668448, 1.1281822905069399, 1.1430267943293995, 1.1578712981518593, 1.1727158019743191, 1.1875603057967787, 1.2024048096192386, 1.2172493134416982, 1.2320938172641578, 1.2469383210866176, 1.2617828249090774, 1.2766273287315373, 1.291471832553997, 1.3063163363764565, 1.3211608401989163, 1.336005344021376, 1.350849847843836, 1.3656943516662956, 1.3805388554887554, 1.395383359311215, 1.4102278631336747, 1.4250723669561345, 1.439916870778594, 1.4547613746010541, 1.4696058784235138, 1.4844503822459734, 1.4992948860684332, 1.5141393898908928, 1.5289838937133526, 1.5438283975358122, 1.5586729013582723, 1.573517405180732, 1.5883619090031915, 1.6032064128256514, 1.618050916648111, 1.6328954204705708, 1.6477399242930304, 1.6625844281154902, 1.67742893193795, 1.6922734357604097, 1.7071179395828695, 1.7219624434053291, 1.736806947227789, 1.7516514510502488, 1.7664959548727084, 1.7813404586951682, 1.7961849625176278, 1.8110294663400877, 1.8258739701625473, 1.8407184739850069, 1.855562977807467, 1.8704074816299265, 1.8852519854523864, 1.900096489274846, 1.9149409930973056, 1.9297854969197654, 1.944630000742225, 1.959474504564685, 1.9743190083871447, 1.9891635122096045, 2.004008016032064, 2.0188525198545237, 2.0336970236769836, 2.0485415274994434, 2.063386031321903, 2.0782305351443626, 2.0930750389668225, 2.1079195427892823, 2.122764046611742, 2.137608550434202, 2.152453054256662, 2.167297558079121, 2.182142061901581, 2.196986565724041, 2.2118310695465, 2.22667557336896, 2.24152007719142, 2.2563645810138797, 2.271209084836339, 2.286053588658799, 2.300898092481259, 2.3157425963037186, 2.3305871001261784, 2.3454316039486383, 2.3602761077710976, 2.3751206115935575, 2.3899651154160173, 2.404809619238477, 2.4196541230609365, 2.4344986268833964, 2.449343130705856, 2.4641876345283156, 2.4790321383507754, 2.4938766421732352, 2.5087211459956955, 2.523565649818155, 2.5384101536406147, 2.5532546574630746, 2.568099161285534, 2.582943665107994, 2.5977881689304536, 2.612632672752913, 2.627477176575373, 2.6423216803978327, 2.6571661842202925, 2.672010688042752, 2.6868551918652117, 2.701699695687672, 2.7165441995101314, 2.731388703332591, 2.746233207155051, 2.761077710977511, 2.7759222147999703, 2.79076671862243, 2.80561122244489, 2.8204557262673493, 2.835300230089809, 2.850144733912269, 2.864989237734729, 2.879833741557188, 2.894678245379648, 2.9095227492021083, 2.9243672530245677, 2.9392117568470275, 2.9540562606694873, 2.9689007644919467, 2.9837452683144066, 2.9985897721368664, 3.0134342759593262, 3.0282787797817856, 3.0431232836042454, 3.0579677874267053, 3.0728122912491647, 3.0876567950716245, 3.1025012988940848, 3.1173458027165446, 3.132190306539004, 3.147034810361464, 3.1618793141839237, 3.176723818006383, 3.191568321828843, 3.2064128256513027, 3.221257329473762, 3.236101833296222, 3.2509463371186818, 3.2657908409411416, 3.280635344763601, 3.295479848586061, 3.310324352408521, 3.3251688562309805, 3.3400133600534403, 3.3548578638759, 3.36970236769836, 3.3845468715208193, 3.399391375343279, 3.414235879165739, 3.4290803829881984, 3.4439248868106582, 3.458769390633118, 3.473613894455578, 3.4884583982780373, 3.5033029021004976, 3.5181474059229574, 3.5329919097454168, 3.5478364135678766, 3.5626809173903364, 3.577525421212796, 3.5923699250352557, 3.6072144288577155, 3.6220589326801753, 3.6369034365026347, 3.6517479403250945, 3.6665924441475544, 3.6814369479700138, 3.6962814517924736, 3.711125955614934, 3.7259704594373937, 3.740814963259853, 3.755659467082313, 3.7705039709047727, 3.785348474727232, 3.800192978549692, 3.815037482372152, 3.829881986194611, 3.844726490017071, 3.859570993839531, 3.8744154976619907, 3.88926000148445, 3.9041045053069103, 3.91894900912937, 3.9337935129518296, 3.9486380167742894, 3.963482520596749, 3.978327024419209, 3.9931715282416684, 4.008016032064128, 4.022860535886588, 4.0377050397090475, 4.052549543531508, 4.067394047353967, 4.0822385511764265, 4.097083054998887, 4.111927558821346, 4.126772062643806, 4.141616566466266, 4.156461070288725, 4.171305574111185, 4.186150077933645, 4.200994581756105, 4.215839085578565, 4.230683589401025, 4.245528093223484, 4.2603725970459445, 4.275217100868404, 4.290061604690863, 4.304906108513324, 4.319750612335783, 4.334595116158242, 4.349439619980703, 4.364284123803162, 4.379128627625621, 4.393973131448082, 4.408817635270541, 4.423662139093, 4.438506642915461, 4.45335114673792, 4.4681956505603795, 4.48304015438284, 4.497884658205299, 4.512729162027759, 4.527573665850219, 4.542418169672678, 4.5572626734951385, 4.572107177317598, 4.586951681140057, 4.601796184962518, 4.616640688784978, 4.631485192607437, 4.6463296964298975, 4.661174200252357, 4.676018704074816, 4.6908632078972765, 4.705707711719736, 4.720552215542195, 4.735396719364656, 4.750241223187115, 4.765085727009575, 4.779930230832035, 4.794774734654494, 4.809619238476954, 4.824463742299414, 4.839308246121873, 4.854152749944333, 4.868997253766793, 4.883841757589252, 4.898686261411712, 4.913530765234172, 4.928375269056631, 4.943219772879091, 4.958064276701551, 4.97290878052401, 4.9877532843464705, 5.002597788168931, 5.017442291991391, 5.03228679581385, 5.04713129963631, 5.06197580345877, 5.0768203072812295, 5.091664811103689, 5.106509314926149, 5.1213538187486085, 5.136198322571068, 5.151042826393528, 5.165887330215988, 5.180731834038447, 5.195576337860907, 5.210420841683367, 5.225265345505826, 5.240109849328286, 5.254954353150746, 5.269798856973206, 5.284643360795665, 5.299487864618125, 5.314332368440585, 5.329176872263044, 5.344021376085504, 5.358865879907964, 5.373710383730423, 5.388554887552883, 5.403399391375344, 5.418243895197803, 5.433088399020263, 5.447932902842723, 5.462777406665182, 5.477621910487643, 5.492466414310102, 5.5073109181325615, 5.522155421955022, 5.536999925777481, 5.5518444295999405, 5.566688933422401, 5.58153343724486, 5.59637794106732, 5.61122244488978, 5.626066948712239, 5.640911452534699, 5.655755956357159, 5.670600460179618, 5.685444964002078, 5.700289467824538, 5.715133971646997, 5.729978475469458, 5.744822979291917, 5.759667483114376, 5.774511986936837, 5.789356490759296, 5.804200994581756, 5.819045498404217, 5.833890002226676, 5.848734506049135, 5.863579009871596, 5.878423513694055, 5.893268017516514, 5.908112521338975, 5.922957025161434, 5.9378015289838935, 5.952646032806354, 5.967490536628813, 5.982335040451273, 5.997179544273733, 6.012024048096192, 6.0268685519186525, 6.041713055741112, 6.056557559563571, 6.0714020633860315, 6.086246567208491, 6.10109107103095, 6.1159355748534106, 6.13078007867587, 6.145624582498329, 6.16046908632079, 6.175313590143249, 6.190158093965708, 6.2050025977881695, 6.219847101610629, 6.234691605433089, 6.249536109255549, 6.264380613078008, 6.279225116900468, 6.294069620722928, 6.308914124545387, 6.323758628367847, 6.338603132190307, 6.353447636012766, 6.368292139835226, 6.383136643657686, 6.397981147480145, 6.412825651302605, 6.427670155125065, 6.442514658947524, 6.4573591627699845, 6.472203666592444, 6.487048170414904, 6.5018926742373635, 6.516737178059823, 6.531581681882283, 6.5464261857047426, 6.561270689527202, 6.576115193349662, 6.590959697172122, 6.605804200994582, 6.620648704817042, 6.6354932086395015, 6.650337712461961, 6.665182216284421, 6.680026720106881, 6.694871223929341, 6.7097157277518, 6.72456023157426, 6.73940473539672, 6.754249239219179, 6.769093743041639, 6.783938246864099, 6.798782750686558, 6.813627254509018, 6.828471758331478, 6.843316262153937, 6.858160765976397, 6.873005269798857, 6.8878497736213165, 6.902694277443776, 6.917538781266236, 6.9323832850886955, 6.947227788911156, 6.962072292733615, 6.9769167965560746, 6.991761300378535, 7.006605804200995, 7.0214503080234545, 7.036294811845915, 7.051139315668374, 7.0659838194908335, 7.080828323313294, 7.095672827135753, 7.110517330958213, 7.125361834780673, 7.140206338603132, 7.155050842425592, 7.169895346248052, 7.184739850070511, 7.199584353892972, 7.214428857715431, 7.22927336153789, 7.244117865360351, 7.25896236918281, 7.273806873005269, 7.28865137682773, 7.303495880650189, 7.3183403844726485, 7.333184888295109, 7.348029392117568, 7.3628738959400275, 7.377718399762488, 7.392562903584947, 7.407407407407407])
+              .range(['#fff5f0ff', '#fff5f0ff', '#fff5f0ff', '#fff5efff', '#fff4efff', '#fff4eeff', '#fff4eeff', '#fff3edff', '#fff3edff', '#fff3edff', '#fff3ecff', '#fff2ecff', '#fff2ebff', '#fff2ebff', '#fff1ebff', '#fff1eaff', '#fff1eaff', '#fff0e9ff', '#fff0e9ff', '#fff0e8ff', '#fff0e8ff', '#ffefe8ff', '#ffefe7ff', '#ffefe7ff', '#ffeee6ff', '#ffeee6ff', '#ffeee5ff', '#ffede5ff', '#ffede5ff', '#ffede4ff', '#ffede4ff', '#ffece3ff', '#ffece3ff', '#ffece2ff', '#ffebe2ff', '#ffebe2ff', '#ffebe1ff', '#ffebe1ff', '#ffeae0ff', '#ffeae0ff', '#ffeae0ff', '#ffe9dfff', '#ffe9dfff', '#ffe9deff', '#ffe8deff', '#ffe8ddff', '#ffe8ddff', '#ffe8ddff', '#ffe7dcff', '#ffe7dcff', '#ffe7dbff', '#ffe6dbff', '#ffe6daff', '#ffe6daff', '#ffe5daff', '#ffe5d9ff', '#ffe5d9ff', '#ffe5d8ff', '#ffe4d8ff', '#ffe4d8ff', '#ffe4d7ff', '#ffe3d7ff', '#ffe3d6ff', '#ffe3d6ff', '#ffe3d5ff', '#ffe2d5ff', '#ffe2d5ff', '#ffe2d4ff', '#ffe1d4ff', '#ffe1d3ff', '#ffe1d3ff', '#ffe0d2ff', '#fee0d2ff', '#fedfd1ff', '#fedfd0ff', '#feded0ff', '#fedecfff', '#feddceff', '#feddceff', '#fedccdff', '#fedcccff', '#fedbccff', '#fedbcbff', '#fedacaff', '#fedacaff', '#fed9c9ff', '#fed9c8ff', '#fed8c7ff', '#fed8c7ff', '#fed7c6ff', '#fed7c5ff', '#fed6c5ff', '#fed6c4ff', '#fed5c3ff', '#fed5c3ff', '#fed4c2ff', '#fed4c1ff', '#fed3c1ff', '#fed2c0ff', '#fed2bfff', '#fed1bfff', '#fed1beff', '#fed0bdff', '#fed0bcff', '#fecfbcff', '#fecfbbff', '#fecebaff', '#fdcebaff', '#fdcdb9ff', '#fdcdb8ff', '#fdccb8ff', '#fdccb7ff', '#fdcbb6ff', '#fdcbb6ff', '#fdcab5ff', '#fdcab4ff', '#fdc9b3ff', '#fdc9b3ff', '#fdc8b2ff', '#fdc8b1ff', '#fdc7b1ff', '#fdc6b0ff', '#fdc6afff', '#fdc5afff', '#fdc5aeff', '#fdc4adff', '#fdc4adff', '#fdc3acff', '#fdc3abff', '#fdc2aaff', '#fdc2aaff', '#fdc1a9ff', '#fdc1a8ff', '#fdc0a8ff', '#fdc0a7ff', '#fdbfa6ff', '#fdbfa6ff', '#fdbea5ff', '#fdbea4ff', '#fdbda4ff', '#fdbda3ff', '#fdbca2ff', '#fdbca2ff', '#fcbba1ff', '#fcbaa0ff', '#fcbaa0ff', '#fcb99fff', '#fcb99eff', '#fcb89eff', '#fcb89dff', '#fcb79cff', '#fcb69cff', '#fcb69bff', '#fcb59aff', '#fcb59aff', '#fcb499ff', '#fcb398ff', '#fcb398ff', '#fcb297ff', '#fcb296ff', '#fcb196ff', '#fcb195ff', '#fcb094ff', '#fcaf94ff', '#fcaf93ff', '#fcae92ff', '#fcae92ff', '#fcad91ff', '#fcad90ff', '#fcac90ff', '#fcab8fff', '#fcab8eff', '#fcaa8eff', '#fcaa8dff', '#fca98cff', '#fca98cff', '#fca88bff', '#fca78aff', '#fca78aff', '#fca689ff', '#fca688ff', '#fca588ff', '#fca487ff', '#fca486ff', '#fca386ff', '#fca385ff', '#fca284ff', '#fca284ff', '#fca183ff', '#fca082ff', '#fca082ff', '#fc9f81ff', '#fc9f80ff', '#fc9e80ff', '#fc9e7fff', '#fc9d7eff', '#fc9c7eff', '#fc9c7dff', '#fc9b7cff', '#fc9b7cff', '#fc9a7bff', '#fc997aff', '#fc997aff', '#fc9879ff', '#fc9878ff', '#fc9778ff', '#fc9777ff', '#fc9676ff', '#fc9576ff', '#fc9575ff', '#fc9475ff', '#fc9474ff', '#fc9373ff', '#fc9373ff', '#fc9272ff', '#fc9171ff', '#fc9171ff', '#fc9070ff', '#fc9070ff', '#fc8f6fff', '#fc8f6eff', '#fc8e6eff', '#fc8d6dff', '#fc8d6dff', '#fc8c6cff', '#fc8c6cff', '#fc8b6bff', '#fc8b6bff', '#fc8a6aff', '#fc8a69ff', '#fc8969ff', '#fc8868ff', '#fc8868ff', '#fc8767ff', '#fc8767ff', '#fc8666ff', '#fc8665ff', '#fc8565ff', '#fc8464ff', '#fc8464ff', '#fc8363ff', '#fc8363ff', '#fc8262ff', '#fc8262ff', '#fc8161ff', '#fc8160ff', '#fc8060ff', '#fc7f5fff', '#fc7f5fff', '#fc7e5eff', '#fc7e5eff', '#fc7d5dff', '#fc7d5cff', '#fc7c5cff', '#fc7b5bff', '#fc7b5bff', '#fc7a5aff', '#fc7a5aff', '#fc7959ff', '#fc7959ff', '#fc7858ff', '#fc7857ff', '#fc7757ff', '#fc7656ff', '#fc7656ff', '#fc7555ff', '#fc7555ff', '#fc7454ff', '#fc7453ff', '#fc7353ff', '#fc7252ff', '#fc7252ff', '#fc7151ff', '#fc7151ff', '#fc7050ff', '#fc7050ff', '#fc6f4fff', '#fc6f4eff', '#fc6e4eff', '#fc6d4dff', '#fc6d4dff', '#fc6c4cff', '#fc6c4cff', '#fc6b4bff', '#fc6b4aff', '#fb6a4aff', '#fb6949ff', '#fb6949ff', '#fb6849ff', '#fb6748ff', '#fb6748ff', '#fa6647ff', '#fa6547ff', '#fa6546ff', '#fa6446ff', '#fa6346ff', '#fa6345ff', '#f96245ff', '#f96144ff', '#f96144ff', '#f96044ff', '#f95f43ff', '#f95f43ff', '#f85e42ff', '#f85d42ff', '#f85d41ff', '#f85c41ff', '#f85b41ff', '#f85b40ff', '#f75a40ff', '#f7593fff', '#f7593fff', '#f7583eff', '#f7573eff', '#f7573eff', '#f6563dff', '#f6553dff', '#f6553cff', '#f6543cff', '#f6543bff', '#f6533bff', '#f5523bff', '#f5523aff', '#f5513aff', '#f55039ff', '#f55039ff', '#f54f39ff', '#f44e38ff', '#f44e38ff', '#f44d37ff', '#f44c37ff', '#f44c36ff', '#f44b36ff', '#f34a36ff', '#f34a35ff', '#f34935ff', '#f34834ff', '#f34834ff', '#f34733ff', '#f24633ff', '#f24633ff', '#f24532ff', '#f24432ff', '#f24431ff', '#f24331ff', '#f14231ff', '#f14230ff', '#f14130ff', '#f1402fff', '#f1402fff', '#f13f2eff', '#f03e2eff', '#f03e2eff', '#f03d2dff', '#f03c2dff', '#f03c2cff', '#f03b2cff', '#ef3a2cff', '#ef3a2bff', '#ee392bff', '#ee392bff', '#ed382bff', '#ed382aff', '#ec372aff', '#ec372aff', '#eb372aff', '#eb362aff', '#ea3629ff', '#ea3529ff', '#e93529ff', '#e93429ff', '#e83429ff', '#e83328ff', '#e73328ff', '#e73228ff', '#e63228ff', '#e63128ff', '#e53127ff', '#e53027ff', '#e43027ff', '#e32f27ff', '#e32f26ff', '#e22e26ff', '#e22e26ff', '#e12d26ff', '#e12d26ff', '#e02c25ff', '#e02c25ff', '#df2b25ff', '#df2b25ff', '#de2a25ff', '#de2a24ff', '#dd2924ff', '#dd2924ff', '#dc2824ff', '#dc2824ff', '#db2723ff', '#db2723ff', '#da2623ff', '#da2623ff', '#d92522ff', '#d92522ff', '#d82422ff', '#d82422ff', '#d72322ff', '#d72321ff', '#d62221ff', '#d62221ff', '#d52121ff', '#d52121ff', '#d42020ff', '#d42020ff', '#d31f20ff', '#d31f20ff', '#d21e20ff', '#d21e1fff', '#d11d1fff', '#d11d1fff', '#d01c1fff', '#d01c1eff', '#cf1b1eff', '#cf1b1eff', '#ce1a1eff', '#ce1a1eff', '#cd191dff', '#cd191dff', '#cc181dff', '#cc181dff', '#cb171dff', '#ca171cff', '#ca171cff', '#c9161cff', '#c8161cff', '#c8161bff', '#c7151bff', '#c6151bff', '#c5151bff', '#c5141bff', '#c4141aff', '#c3141aff', '#c3131aff', '#c2131aff', '#c11319ff', '#c11219ff', '#c01219ff', '#bf1219ff', '#be1118ff', '#be1118ff', '#bd1118ff', '#bc1018ff', '#bc1018ff', '#bb1017ff', '#ba0f17ff', '#b90f17ff', '#b90f17ff', '#b80e16ff', '#b70e16ff', '#b70e16ff', '#b60d16ff', '#b50d16ff', '#b50d15ff', '#b40c15ff', '#b30c15ff', '#b20c15ff', '#b20b14ff', '#b10b14ff', '#b00b14ff', '#b00a14ff', '#af0a14ff', '#ae0a13ff', '#ae0913ff', '#ad0913ff', '#ac0913ff', '#ab0812ff', '#ab0812ff', '#aa0812ff', '#a90712ff', '#a90712ff', '#a80711ff', '#a70611ff', '#a60611ff', '#a60611ff', '#a50510ff', '#a40510ff', '#a40510ff', '#a30410ff', '#a2040fff', '#a2040fff', '#a1030fff', '#a0030fff', '#9f030fff', '#9f020eff', '#9e020eff', '#9d020eff', '#9d010eff', '#9c010dff', '#9b010dff', '#9b000dff', '#9a000dff', '#99000dff']);
+    
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.x = d3.scale.linear()
+              .domain([0.0, 7.407407407407407])
+              .range([0, 450 - 50]);
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.legend = L.control({position: 'topright'});
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.legend.addTo(map_309b46329da047861467f50cbf1886af);
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.xAxis = d3.svg.axis()
+        .scale(color_map_f09f686f60e1a170b7739fa2160fe1cc.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([0.0, 1.0582010582010581, 2.1164021164021163, 3.1746031746031744, 4.232804232804233, 5.291005291005291, 6.349206349206349, 7.407407407407407]);
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.g = color_map_f09f686f60e1a170b7739fa2160fe1cc.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.g.selectAll("rect")
+        .data(color_map_f09f686f60e1a170b7739fa2160fe1cc.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_f09f686f60e1a170b7739fa2160fe1cc.x(color_map_f09f686f60e1a170b7739fa2160fe1cc.color.domain()[i - 1]) : color_map_f09f686f60e1a170b7739fa2160fe1cc.x.range()[0],
+            x1: i < color_map_f09f686f60e1a170b7739fa2160fe1cc.color.domain().length ? color_map_f09f686f60e1a170b7739fa2160fe1cc.x(color_map_f09f686f60e1a170b7739fa2160fe1cc.color.domain()[i]) : color_map_f09f686f60e1a170b7739fa2160fe1cc.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_f09f686f60e1a170b7739fa2160fe1cc.g.call(color_map_f09f686f60e1a170b7739fa2160fe1cc.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("PM25 2020 \u2013 % de d\u00edas excedidos");
+    
+            var feature_group_0467476ac02d26695ed392f5185be98c = L.featureGroup(
+                {
+}
+            );
+        
+    
+        function geo_json_d51b21f9ac93d780487e98f34489fa31_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fc6d4dff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_d51b21f9ac93d780487e98f34489fa31_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fc6d4dff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_d51b21f9ac93d780487e98f34489fa31_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_d51b21f9ac93d780487e98f34489fa31_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_d51b21f9ac93d780487e98f34489fa31_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_d51b21f9ac93d780487e98f34489fa31.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_d51b21f9ac93d780487e98f34489fa31_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_d51b21f9ac93d780487e98f34489fa31 = L.geoJson(null, {
+                onEachFeature: geo_json_d51b21f9ac93d780487e98f34489fa31_onEachFeature,
+            
+                style: geo_json_d51b21f9ac93d780487e98f34489fa31_styler,
+                pointToLayer: geo_json_d51b21f9ac93d780487e98f34489fa31_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_d51b21f9ac93d780487e98f34489fa31_add (data) {
+            geo_json_d51b21f9ac93d780487e98f34489fa31
+                .addData(data);
+        }
+            geo_json_d51b21f9ac93d780487e98f34489fa31_add({"features": [{"geometry": {"coordinates": [-100.335847, 25.67602], "type": "Point"}, "properties": {"color": "#fc6d4dff", "estacion": "CENTRO"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_d51b21f9ac93d780487e98f34489fa31.bindTooltip(
+                `<div>
+                     CENTRO: 4.2% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_2495a700b0ace8be8c351c06f4e9dd94 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_a4988a660036fd09ae254c4388335a96 = $(`<div id="html_a4988a660036fd09ae254c4388335a96" style="width: 100.0%; height: 100.0%;"><b>CENTRO</b><br>PM25 2020<br>Días excedidos: 11 / 265<br>% excedidos: 4.2%</div>`)[0];
+                popup_2495a700b0ace8be8c351c06f4e9dd94.setContent(html_a4988a660036fd09ae254c4388335a96);
+            
+        
+
+        geo_json_d51b21f9ac93d780487e98f34489fa31.bindPopup(popup_2495a700b0ace8be8c351c06f4e9dd94)
+        ;
+
+        
+    
+    
+            geo_json_d51b21f9ac93d780487e98f34489fa31.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_310a1b8057204bf93c48a0176f77f150 = L.marker(
+                [25.67602, -100.335847],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_5bc46b578d3226fe63fdd69a9a105e78 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    CENTRO\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_310a1b8057204bf93c48a0176f77f150.setIcon(div_icon_5bc46b578d3226fe63fdd69a9a105e78);
+            
+    
+        function geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fc9676ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fc9676ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_b1520b7c33fea7a5d50beac0d1dc51c0.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_b1520b7c33fea7a5d50beac0d1dc51c0 = L.geoJson(null, {
+                onEachFeature: geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_onEachFeature,
+            
+                style: geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_styler,
+                pointToLayer: geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_add (data) {
+            geo_json_b1520b7c33fea7a5d50beac0d1dc51c0
+                .addData(data);
+        }
+            geo_json_b1520b7c33fea7a5d50beac0d1dc51c0_add({"features": [{"geometry": {"coordinates": [-100.25502, 25.74543], "type": "Point"}, "properties": {"color": "#fc9676ff", "estacion": "NORESTE"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_b1520b7c33fea7a5d50beac0d1dc51c0.bindTooltip(
+                `<div>
+                     NORESTE: 3.1% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_5a26b18082ac25833d0762033271d468 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_37d1acecffcf76f099098ad013db711d = $(`<div id="html_37d1acecffcf76f099098ad013db711d" style="width: 100.0%; height: 100.0%;"><b>NORESTE</b><br>PM25 2020<br>Días excedidos: 10 / 325<br>% excedidos: 3.1%</div>`)[0];
+                popup_5a26b18082ac25833d0762033271d468.setContent(html_37d1acecffcf76f099098ad013db711d);
+            
+        
+
+        geo_json_b1520b7c33fea7a5d50beac0d1dc51c0.bindPopup(popup_5a26b18082ac25833d0762033271d468)
+        ;
+
+        
+    
+    
+            geo_json_b1520b7c33fea7a5d50beac0d1dc51c0.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_d8f58cebc309f3b43607d73dd3c4c90c = L.marker(
+                [25.74543, -100.25502],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_3ec62a859285fc4850c4d02d235a025b = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NORESTE\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_d8f58cebc309f3b43607d73dd3c4c90c.setIcon(div_icon_3ec62a859285fc4850c4d02d235a025b);
+            
+    
+        function geo_json_780f497528cca4becd8749388a2310cf_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fed0bdff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_780f497528cca4becd8749388a2310cf_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fed0bdff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_780f497528cca4becd8749388a2310cf_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_780f497528cca4becd8749388a2310cf_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_780f497528cca4becd8749388a2310cf_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_780f497528cca4becd8749388a2310cf.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_780f497528cca4becd8749388a2310cf_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_780f497528cca4becd8749388a2310cf = L.geoJson(null, {
+                onEachFeature: geo_json_780f497528cca4becd8749388a2310cf_onEachFeature,
+            
+                style: geo_json_780f497528cca4becd8749388a2310cf_styler,
+                pointToLayer: geo_json_780f497528cca4becd8749388a2310cf_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_780f497528cca4becd8749388a2310cf_add (data) {
+            geo_json_780f497528cca4becd8749388a2310cf
+                .addData(data);
+        }
+            geo_json_780f497528cca4becd8749388a2310cf_add({"features": [{"geometry": {"coordinates": [-100.188055, 25.77722], "type": "Point"}, "properties": {"color": "#fed0bdff", "estacion": "NORESTE2"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_780f497528cca4becd8749388a2310cf.bindTooltip(
+                `<div>
+                     NORESTE2: 1.5% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_6e030ff9a617ce2ca7a9e5818d464f00 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1b988cccd2339ec82485d44ab975d6ab = $(`<div id="html_1b988cccd2339ec82485d44ab975d6ab" style="width: 100.0%; height: 100.0%;"><b>NORESTE2</b><br>PM25 2020<br>Días excedidos: 3 / 198<br>% excedidos: 1.5%</div>`)[0];
+                popup_6e030ff9a617ce2ca7a9e5818d464f00.setContent(html_1b988cccd2339ec82485d44ab975d6ab);
+            
+        
+
+        geo_json_780f497528cca4becd8749388a2310cf.bindPopup(popup_6e030ff9a617ce2ca7a9e5818d464f00)
+        ;
+
+        
+    
+    
+            geo_json_780f497528cca4becd8749388a2310cf.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_62e96565c4de79a1507a4fa89d7c67e4 = L.marker(
+                [25.77722, -100.188055],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_7e8feb6fd995bd42848489210c24407b = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NORESTE2\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_62e96565c4de79a1507a4fa89d7c67e4.setIcon(div_icon_7e8feb6fd995bd42848489210c24407b);
+            
+    
+        function geo_json_c7c070a121cde422b15c5eaafc8c24a6_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fff5f0ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_c7c070a121cde422b15c5eaafc8c24a6_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fff5f0ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_c7c070a121cde422b15c5eaafc8c24a6_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_c7c070a121cde422b15c5eaafc8c24a6_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_c7c070a121cde422b15c5eaafc8c24a6_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_c7c070a121cde422b15c5eaafc8c24a6.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_c7c070a121cde422b15c5eaafc8c24a6_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_c7c070a121cde422b15c5eaafc8c24a6 = L.geoJson(null, {
+                onEachFeature: geo_json_c7c070a121cde422b15c5eaafc8c24a6_onEachFeature,
+            
+                style: geo_json_c7c070a121cde422b15c5eaafc8c24a6_styler,
+                pointToLayer: geo_json_c7c070a121cde422b15c5eaafc8c24a6_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_c7c070a121cde422b15c5eaafc8c24a6_add (data) {
+            geo_json_c7c070a121cde422b15c5eaafc8c24a6
+                .addData(data);
+        }
+            geo_json_c7c070a121cde422b15c5eaafc8c24a6_add({"features": [{"geometry": {"coordinates": [-100.078176, 25.791343], "type": "Point"}, "properties": {"color": "#fff5f0ff", "estacion": "NORESTE3"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_c7c070a121cde422b15c5eaafc8c24a6.bindTooltip(
+                `<div>
+                     NORESTE3: 0.0% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_fa69b6a397aeeaad871044cd6127d48c = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_f9bbddb9d82e6108e123676a7c4d3a24 = $(`<div id="html_f9bbddb9d82e6108e123676a7c4d3a24" style="width: 100.0%; height: 100.0%;"><b>NORESTE3</b><br>PM25 2020<br>Días excedidos: 0 / 1<br>% excedidos: 0.0%</div>`)[0];
+                popup_fa69b6a397aeeaad871044cd6127d48c.setContent(html_f9bbddb9d82e6108e123676a7c4d3a24);
+            
+        
+
+        geo_json_c7c070a121cde422b15c5eaafc8c24a6.bindPopup(popup_fa69b6a397aeeaad871044cd6127d48c)
+        ;
+
+        
+    
+    
+            geo_json_c7c070a121cde422b15c5eaafc8c24a6.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_5866a320e759333df3025ba36c332679 = L.marker(
+                [25.791343, -100.078176],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_7696c1135057cb50a98fe075bf2068f6 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NORESTE3\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_5866a320e759333df3025ba36c332679.setIcon(div_icon_7696c1135057cb50a98fe075bf2068f6);
+            
+    
+        function geo_json_3b7ed616aab30ef0838bbb0916dfd492_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#ffeae0ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_3b7ed616aab30ef0838bbb0916dfd492_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#ffeae0ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_3b7ed616aab30ef0838bbb0916dfd492_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_3b7ed616aab30ef0838bbb0916dfd492_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_3b7ed616aab30ef0838bbb0916dfd492_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_3b7ed616aab30ef0838bbb0916dfd492.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_3b7ed616aab30ef0838bbb0916dfd492_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_3b7ed616aab30ef0838bbb0916dfd492 = L.geoJson(null, {
+                onEachFeature: geo_json_3b7ed616aab30ef0838bbb0916dfd492_onEachFeature,
+            
+                style: geo_json_3b7ed616aab30ef0838bbb0916dfd492_styler,
+                pointToLayer: geo_json_3b7ed616aab30ef0838bbb0916dfd492_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_3b7ed616aab30ef0838bbb0916dfd492_add (data) {
+            geo_json_3b7ed616aab30ef0838bbb0916dfd492
+                .addData(data);
+        }
+            geo_json_3b7ed616aab30ef0838bbb0916dfd492_add({"features": [{"geometry": {"coordinates": [-100.365974, 25.75712], "type": "Point"}, "properties": {"color": "#ffeae0ff", "estacion": "NOROESTE"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_3b7ed616aab30ef0838bbb0916dfd492.bindTooltip(
+                `<div>
+                     NOROESTE: 0.6% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_429353702477388fd3c45ad4bb6de905 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_a8b2bc5f1d80244619cabb323e066a07 = $(`<div id="html_a8b2bc5f1d80244619cabb323e066a07" style="width: 100.0%; height: 100.0%;"><b>NOROESTE</b><br>PM25 2020<br>Días excedidos: 2 / 350<br>% excedidos: 0.6%</div>`)[0];
+                popup_429353702477388fd3c45ad4bb6de905.setContent(html_a8b2bc5f1d80244619cabb323e066a07);
+            
+        
+
+        geo_json_3b7ed616aab30ef0838bbb0916dfd492.bindPopup(popup_429353702477388fd3c45ad4bb6de905)
+        ;
+
+        
+    
+    
+            geo_json_3b7ed616aab30ef0838bbb0916dfd492.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_4d98215cdf14c657052c8802c32a32e3 = L.marker(
+                [25.75712, -100.365974],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_5356f5e768a94d419d878d7fe58d01fe = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NOROESTE\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_4d98215cdf14c657052c8802c32a32e3.setIcon(div_icon_5356f5e768a94d419d878d7fe58d01fe);
+            
+    
+        function geo_json_c20417637e4f2d12141aa0c25b3e4227_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#99000dff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_c20417637e4f2d12141aa0c25b3e4227_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#99000dff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_c20417637e4f2d12141aa0c25b3e4227_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_c20417637e4f2d12141aa0c25b3e4227_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_c20417637e4f2d12141aa0c25b3e4227_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_c20417637e4f2d12141aa0c25b3e4227.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_c20417637e4f2d12141aa0c25b3e4227_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_c20417637e4f2d12141aa0c25b3e4227 = L.geoJson(null, {
+                onEachFeature: geo_json_c20417637e4f2d12141aa0c25b3e4227_onEachFeature,
+            
+                style: geo_json_c20417637e4f2d12141aa0c25b3e4227_styler,
+                pointToLayer: geo_json_c20417637e4f2d12141aa0c25b3e4227_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_c20417637e4f2d12141aa0c25b3e4227_add (data) {
+            geo_json_c20417637e4f2d12141aa0c25b3e4227
+                .addData(data);
+        }
+            geo_json_c20417637e4f2d12141aa0c25b3e4227_add({"features": [{"geometry": {"coordinates": [-100.585833, 25.783331], "type": "Point"}, "properties": {"color": "#99000dff", "estacion": "NOROESTE2"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_c20417637e4f2d12141aa0c25b3e4227.bindTooltip(
+                `<div>
+                     NOROESTE2: 7.4% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_285d21923d683c7ca0167a71079bd7e9 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1026dce69da0a571f1514379d6931a1b = $(`<div id="html_1026dce69da0a571f1514379d6931a1b" style="width: 100.0%; height: 100.0%;"><b>NOROESTE2</b><br>PM25 2020<br>Días excedidos: 22 / 297<br>% excedidos: 7.4%</div>`)[0];
+                popup_285d21923d683c7ca0167a71079bd7e9.setContent(html_1026dce69da0a571f1514379d6931a1b);
+            
+        
+
+        geo_json_c20417637e4f2d12141aa0c25b3e4227.bindPopup(popup_285d21923d683c7ca0167a71079bd7e9)
+        ;
+
+        
+    
+    
+            geo_json_c20417637e4f2d12141aa0c25b3e4227.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_2535398124a9561672514e20438ee072 = L.marker(
+                [25.783331, -100.585833],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_78b72bfd44107abdc8ebad47c3ff3ac6 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NOROESTE2\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_2535398124a9561672514e20438ee072.setIcon(div_icon_78b72bfd44107abdc8ebad47c3ff3ac6);
+            
+    
+        function geo_json_d466081dd16a3b554f0e869134ecea38_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fedacaff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_d466081dd16a3b554f0e869134ecea38_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fedacaff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_d466081dd16a3b554f0e869134ecea38_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_d466081dd16a3b554f0e869134ecea38_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_d466081dd16a3b554f0e869134ecea38_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_d466081dd16a3b554f0e869134ecea38.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_d466081dd16a3b554f0e869134ecea38_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_d466081dd16a3b554f0e869134ecea38 = L.geoJson(null, {
+                onEachFeature: geo_json_d466081dd16a3b554f0e869134ecea38_onEachFeature,
+            
+                style: geo_json_d466081dd16a3b554f0e869134ecea38_styler,
+                pointToLayer: geo_json_d466081dd16a3b554f0e869134ecea38_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_d466081dd16a3b554f0e869134ecea38_add (data) {
+            geo_json_d466081dd16a3b554f0e869134ecea38
+                .addData(data);
+        }
+            geo_json_d466081dd16a3b554f0e869134ecea38_add({"features": [{"geometry": {"coordinates": [-100.343056, 25.80194], "type": "Point"}, "properties": {"color": "#fedacaff", "estacion": "NORTE"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_d466081dd16a3b554f0e869134ecea38.bindTooltip(
+                `<div>
+                     NORTE: 1.2% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_c0fb26e0415509b5009c8bcb04531b81 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_e22ee1b5f2bd4bd5f81051aa3a90d36f = $(`<div id="html_e22ee1b5f2bd4bd5f81051aa3a90d36f" style="width: 100.0%; height: 100.0%;"><b>NORTE</b><br>PM25 2020<br>Días excedidos: 3 / 242<br>% excedidos: 1.2%</div>`)[0];
+                popup_c0fb26e0415509b5009c8bcb04531b81.setContent(html_e22ee1b5f2bd4bd5f81051aa3a90d36f);
+            
+        
+
+        geo_json_d466081dd16a3b554f0e869134ecea38.bindPopup(popup_c0fb26e0415509b5009c8bcb04531b81)
+        ;
+
+        
+    
+    
+            geo_json_d466081dd16a3b554f0e869134ecea38.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_708aa8317f59d992531f25d18f559e82 = L.marker(
+                [25.80194, -100.343056],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_515d5cf38121a6560cbd255a9571e0ec = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NORTE\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_708aa8317f59d992531f25d18f559e82.setIcon(div_icon_515d5cf38121a6560cbd255a9571e0ec);
+            
+    
+        function geo_json_2c00409ae14e0b754bdec1d6578c1478_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fee0d2ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_2c00409ae14e0b754bdec1d6578c1478_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fee0d2ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_2c00409ae14e0b754bdec1d6578c1478_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_2c00409ae14e0b754bdec1d6578c1478_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_2c00409ae14e0b754bdec1d6578c1478_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_2c00409ae14e0b754bdec1d6578c1478.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_2c00409ae14e0b754bdec1d6578c1478_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_2c00409ae14e0b754bdec1d6578c1478 = L.geoJson(null, {
+                onEachFeature: geo_json_2c00409ae14e0b754bdec1d6578c1478_onEachFeature,
+            
+                style: geo_json_2c00409ae14e0b754bdec1d6578c1478_styler,
+                pointToLayer: geo_json_2c00409ae14e0b754bdec1d6578c1478_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_2c00409ae14e0b754bdec1d6578c1478_add (data) {
+            geo_json_2c00409ae14e0b754bdec1d6578c1478
+                .addData(data);
+        }
+            geo_json_2c00409ae14e0b754bdec1d6578c1478_add({"features": [{"geometry": {"coordinates": [-100.310028, 25.729787], "type": "Point"}, "properties": {"color": "#fee0d2ff", "estacion": "NORTE2"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_2c00409ae14e0b754bdec1d6578c1478.bindTooltip(
+                `<div>
+                     NORTE2: 1.1% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_67f787139f655f54af829c451177263b = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_41e84ab03587f2c6cddddecf72fd6bd2 = $(`<div id="html_41e84ab03587f2c6cddddecf72fd6bd2" style="width: 100.0%; height: 100.0%;"><b>NORTE2</b><br>PM25 2020<br>Días excedidos: 2 / 188<br>% excedidos: 1.1%</div>`)[0];
+                popup_67f787139f655f54af829c451177263b.setContent(html_41e84ab03587f2c6cddddecf72fd6bd2);
+            
+        
+
+        geo_json_2c00409ae14e0b754bdec1d6578c1478.bindPopup(popup_67f787139f655f54af829c451177263b)
+        ;
+
+        
+    
+    
+            geo_json_2c00409ae14e0b754bdec1d6578c1478.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_f5396aaafd0f1433f29bf1cc9a13d7c1 = L.marker(
+                [25.729787, -100.310028],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_a64a365242c88425b0364e6744b06d62 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    NORTE2\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_f5396aaafd0f1433f29bf1cc9a13d7c1.setIcon(div_icon_a64a365242c88425b0364e6744b06d62);
+            
+    
+        function geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fff5f0ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fff5f0ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7 = L.geoJson(null, {
+                onEachFeature: geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_onEachFeature,
+            
+                style: geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_styler,
+                pointToLayer: geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_add (data) {
+            geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7
+                .addData(data);
+        }
+            geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7_add({"features": [{"geometry": {"coordinates": [-100.249371, 25.575383], "type": "Point"}, "properties": {"color": "#fff5f0ff", "estacion": "SUR"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7.bindTooltip(
+                `<div>
+                     SUR: 0.0% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_c25da0377fb984f3ff6442c4fa51d6cc = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1626ffa62d1154a5f75053dbea1a3bc5 = $(`<div id="html_1626ffa62d1154a5f75053dbea1a3bc5" style="width: 100.0%; height: 100.0%;"><b>SUR</b><br>PM25 2020<br>Días excedidos: 0 / 123<br>% excedidos: 0.0%</div>`)[0];
+                popup_c25da0377fb984f3ff6442c4fa51d6cc.setContent(html_1626ffa62d1154a5f75053dbea1a3bc5);
+            
+        
+
+        geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7.bindPopup(popup_c25da0377fb984f3ff6442c4fa51d6cc)
+        ;
+
+        
+    
+    
+            geo_json_a8c8ffe5e1d9a43804bc113bb7c310f7.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_8ece8755886dd99cec9447d676def8a8 = L.marker(
+                [25.575383, -100.249371],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_7cee292b3a53869f8449794193761512 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    SUR\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_8ece8755886dd99cec9447d676def8a8.setIcon(div_icon_7cee292b3a53869f8449794193761512);
+            
+    
+        function geo_json_2988cf01c75917a6074482e7173389db_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#ffe9dfff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_2988cf01c75917a6074482e7173389db_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#ffe9dfff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_2988cf01c75917a6074482e7173389db_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_2988cf01c75917a6074482e7173389db_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_2988cf01c75917a6074482e7173389db_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_2988cf01c75917a6074482e7173389db.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_2988cf01c75917a6074482e7173389db_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_2988cf01c75917a6074482e7173389db = L.geoJson(null, {
+                onEachFeature: geo_json_2988cf01c75917a6074482e7173389db_onEachFeature,
+            
+                style: geo_json_2988cf01c75917a6074482e7173389db_styler,
+                pointToLayer: geo_json_2988cf01c75917a6074482e7173389db_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_2988cf01c75917a6074482e7173389db_add (data) {
+            geo_json_2988cf01c75917a6074482e7173389db
+                .addData(data);
+        }
+            geo_json_2988cf01c75917a6074482e7173389db_add({"features": [{"geometry": {"coordinates": [-100.24958, 25.66827], "type": "Point"}, "properties": {"color": "#ffe9dfff", "estacion": "SURESTE"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_2988cf01c75917a6074482e7173389db.bindTooltip(
+                `<div>
+                     SURESTE: 0.6% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_28e3e07244418e5ee073849cbb233115 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_c44a47c7a520a6faed0313d65e5b7740 = $(`<div id="html_c44a47c7a520a6faed0313d65e5b7740" style="width: 100.0%; height: 100.0%;"><b>SURESTE</b><br>PM25 2020<br>Días excedidos: 2 / 320<br>% excedidos: 0.6%</div>`)[0];
+                popup_28e3e07244418e5ee073849cbb233115.setContent(html_c44a47c7a520a6faed0313d65e5b7740);
+            
+        
+
+        geo_json_2988cf01c75917a6074482e7173389db.bindPopup(popup_28e3e07244418e5ee073849cbb233115)
+        ;
+
+        
+    
+    
+            geo_json_2988cf01c75917a6074482e7173389db.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_85994391667e388e75a87a830c71ed22 = L.marker(
+                [25.66827, -100.24958],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_cfbca7e07c7e9c3db0d02ebcb233896a = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    SURESTE\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_85994391667e388e75a87a830c71ed22.setIcon(div_icon_cfbca7e07c7e9c3db0d02ebcb233896a);
+            
+    
+        function geo_json_1b0e2a696a77611397a44a039668c77e_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fc7c5cff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_1b0e2a696a77611397a44a039668c77e_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fc7c5cff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_1b0e2a696a77611397a44a039668c77e_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_1b0e2a696a77611397a44a039668c77e_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_1b0e2a696a77611397a44a039668c77e_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_1b0e2a696a77611397a44a039668c77e.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_1b0e2a696a77611397a44a039668c77e_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1b0e2a696a77611397a44a039668c77e = L.geoJson(null, {
+                onEachFeature: geo_json_1b0e2a696a77611397a44a039668c77e_onEachFeature,
+            
+                style: geo_json_1b0e2a696a77611397a44a039668c77e_styler,
+                pointToLayer: geo_json_1b0e2a696a77611397a44a039668c77e_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_1b0e2a696a77611397a44a039668c77e_add (data) {
+            geo_json_1b0e2a696a77611397a44a039668c77e
+                .addData(data);
+        }
+            geo_json_1b0e2a696a77611397a44a039668c77e_add({"features": [{"geometry": {"coordinates": [-100.095555, 25.64611], "type": "Point"}, "properties": {"color": "#fc7c5cff", "estacion": "SURESTE2"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_1b0e2a696a77611397a44a039668c77e.bindTooltip(
+                `<div>
+                     SURESTE2: 3.8% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_376c426da4d39da1bedcbb314ce6ded4 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_9d4c71af7b1c1f027fe0d30dd1d59a5f = $(`<div id="html_9d4c71af7b1c1f027fe0d30dd1d59a5f" style="width: 100.0%; height: 100.0%;"><b>SURESTE2</b><br>PM25 2020<br>Días excedidos: 9 / 240<br>% excedidos: 3.8%</div>`)[0];
+                popup_376c426da4d39da1bedcbb314ce6ded4.setContent(html_9d4c71af7b1c1f027fe0d30dd1d59a5f);
+            
+        
+
+        geo_json_1b0e2a696a77611397a44a039668c77e.bindPopup(popup_376c426da4d39da1bedcbb314ce6ded4)
+        ;
+
+        
+    
+    
+            geo_json_1b0e2a696a77611397a44a039668c77e.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_98bba148e5d8e0625e033ae909485da8 = L.marker(
+                [25.64611, -100.095555],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_82d31d312963dbf6f776247bcf04c113 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    SURESTE2\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_98bba148e5d8e0625e033ae909485da8.setIcon(div_icon_82d31d312963dbf6f776247bcf04c113);
+            
+    
+        function geo_json_1d36373b0e6a81e091a02d9bd05b201f_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fdcbb7ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_1d36373b0e6a81e091a02d9bd05b201f_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fdcbb7ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_1d36373b0e6a81e091a02d9bd05b201f_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_1d36373b0e6a81e091a02d9bd05b201f_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_1d36373b0e6a81e091a02d9bd05b201f_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_1d36373b0e6a81e091a02d9bd05b201f.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_1d36373b0e6a81e091a02d9bd05b201f_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1d36373b0e6a81e091a02d9bd05b201f = L.geoJson(null, {
+                onEachFeature: geo_json_1d36373b0e6a81e091a02d9bd05b201f_onEachFeature,
+            
+                style: geo_json_1d36373b0e6a81e091a02d9bd05b201f_styler,
+                pointToLayer: geo_json_1d36373b0e6a81e091a02d9bd05b201f_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_1d36373b0e6a81e091a02d9bd05b201f_add (data) {
+            geo_json_1d36373b0e6a81e091a02d9bd05b201f
+                .addData(data);
+        }
+            geo_json_1d36373b0e6a81e091a02d9bd05b201f_add({"features": [{"geometry": {"coordinates": [-99.995334, 25.60087], "type": "Point"}, "properties": {"color": "#fdcbb7ff", "estacion": "SURESTE3"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_1d36373b0e6a81e091a02d9bd05b201f.bindTooltip(
+                `<div>
+                     SURESTE3: 1.7% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_2c7655ee59e05b1c5461cd6e6f7ad717 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_4f85d3a52a8102f5cf3bb02ff02e1135 = $(`<div id="html_4f85d3a52a8102f5cf3bb02ff02e1135" style="width: 100.0%; height: 100.0%;"><b>SURESTE3</b><br>PM25 2020<br>Días excedidos: 5 / 302<br>% excedidos: 1.7%</div>`)[0];
+                popup_2c7655ee59e05b1c5461cd6e6f7ad717.setContent(html_4f85d3a52a8102f5cf3bb02ff02e1135);
+            
+        
+
+        geo_json_1d36373b0e6a81e091a02d9bd05b201f.bindPopup(popup_2c7655ee59e05b1c5461cd6e6f7ad717)
+        ;
+
+        
+    
+    
+            geo_json_1d36373b0e6a81e091a02d9bd05b201f.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_ee106daff21d1e6de55f2ccbc0f6ef3e = L.marker(
+                [25.60087, -99.995334],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_40dadf57020796fc29a9bf83abca0889 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    SURESTE3\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_ee106daff21d1e6de55f2ccbc0f6ef3e.setIcon(div_icon_40dadf57020796fc29a9bf83abca0889);
+            
+    
+        function geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fc9c7eff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fc9c7eff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_d3ae2af5c64609e2bb57d89c0e99d9de.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_d3ae2af5c64609e2bb57d89c0e99d9de = L.geoJson(null, {
+                onEachFeature: geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_onEachFeature,
+            
+                style: geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_styler,
+                pointToLayer: geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_add (data) {
+            geo_json_d3ae2af5c64609e2bb57d89c0e99d9de
+                .addData(data);
+        }
+            geo_json_d3ae2af5c64609e2bb57d89c0e99d9de_add({"features": [{"geometry": {"coordinates": [-100.460037, 25.675356], "type": "Point"}, "properties": {"color": "#fc9c7eff", "estacion": "SUROESTE"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_d3ae2af5c64609e2bb57d89c0e99d9de.bindTooltip(
+                `<div>
+                     SUROESTE: 2.9% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_18ce9d044b204e705aa3e7124d57b312 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_c96640bb61bfcd7c6ebd0d7855ef6427 = $(`<div id="html_c96640bb61bfcd7c6ebd0d7855ef6427" style="width: 100.0%; height: 100.0%;"><b>SUROESTE</b><br>PM25 2020<br>Días excedidos: 10 / 344<br>% excedidos: 2.9%</div>`)[0];
+                popup_18ce9d044b204e705aa3e7124d57b312.setContent(html_c96640bb61bfcd7c6ebd0d7855ef6427);
+            
+        
+
+        geo_json_d3ae2af5c64609e2bb57d89c0e99d9de.bindPopup(popup_18ce9d044b204e705aa3e7124d57b312)
+        ;
+
+        
+    
+    
+            geo_json_d3ae2af5c64609e2bb57d89c0e99d9de.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_74a558ca535af3fe7a04b8b130e0bb78 = L.marker(
+                [25.675356, -100.460037],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_72db06a4af7b6482d48d4fd74491beb4 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    SUROESTE\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_74a558ca535af3fe7a04b8b130e0bb78.setIcon(div_icon_72db06a4af7b6482d48d4fd74491beb4);
+            
+    
+        function geo_json_1030048bd2485c71d724b3d6af5c05aa_styler(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"color": "black", "fill": true, "fillColor": "#fdc6b0ff", "fillOpacity": 0.95, "opacity": 1.0, "radius": 8, "weight": 1};
+            }
+        }
+        function geo_json_1030048bd2485c71d724b3d6af5c05aa_highlighter(feature) {
+            switch(feature.properties.estacion) {
+                default:
+                    return {"fill": true, "fillColor": "#fdc6b0ff", "fillOpacity": 1.0, "opacity": 1.0, "radius": 14, "weight": 2};
+            }
+        }
+        function geo_json_1030048bd2485c71d724b3d6af5c05aa_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 10,
+};
+            
+            let style = geo_json_1030048bd2485c71d724b3d6af5c05aa_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_1030048bd2485c71d724b3d6af5c05aa_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_1030048bd2485c71d724b3d6af5c05aa.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_1030048bd2485c71d724b3d6af5c05aa_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1030048bd2485c71d724b3d6af5c05aa = L.geoJson(null, {
+                onEachFeature: geo_json_1030048bd2485c71d724b3d6af5c05aa_onEachFeature,
+            
+                style: geo_json_1030048bd2485c71d724b3d6af5c05aa_styler,
+                pointToLayer: geo_json_1030048bd2485c71d724b3d6af5c05aa_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_1030048bd2485c71d724b3d6af5c05aa_add (data) {
+            geo_json_1030048bd2485c71d724b3d6af5c05aa
+                .addData(data);
+        }
+            geo_json_1030048bd2485c71d724b3d6af5c05aa_add({"features": [{"geometry": {"coordinates": [-100.412778, 25.66528], "type": "Point"}, "properties": {"color": "#fdc6b0ff", "estacion": "SUROESTE2"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_1030048bd2485c71d724b3d6af5c05aa.bindTooltip(
+                `<div>
+                     SUROESTE2: 1.8% de días excedidos
+                 </div>`,
+                {
+  "direction": "top",
+  "opacity": 0.95,
+  "sticky": true,
+}
+            );
+        
+    
+        var popup_8c1a8707e62129623cfa97b7813bf485 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_fd168b97230f2c69352869acf2327dce = $(`<div id="html_fd168b97230f2c69352869acf2327dce" style="width: 100.0%; height: 100.0%;"><b>SUROESTE2</b><br>PM25 2020<br>Días excedidos: 5 / 278<br>% excedidos: 1.8%</div>`)[0];
+                popup_8c1a8707e62129623cfa97b7813bf485.setContent(html_fd168b97230f2c69352869acf2327dce);
+            
+        
+
+        geo_json_1030048bd2485c71d724b3d6af5c05aa.bindPopup(popup_8c1a8707e62129623cfa97b7813bf485)
+        ;
+
+        
+    
+    
+            geo_json_1030048bd2485c71d724b3d6af5c05aa.addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var marker_a75b15fb1c61a1532036cf45c0978073 = L.marker(
+                [25.66528, -100.412778],
+                {
+}
+            ).addTo(feature_group_0467476ac02d26695ed392f5185be98c);
+        
+    
+            var div_icon_b1fbe5d82cb8fa05a213c14ba9b7f0e9 = L.divIcon({
+  "html": "\n                \u003cdiv style=\"\n                    font-size:10px; font-weight:600; color:#111;\n                    text-shadow:0 0 3px #fff;\n                    transform: translate(-50%, -16px);\n                    pointer-events: none;\"\u003e\n                    SUROESTE2\n                \u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_a75b15fb1c61a1532036cf45c0978073.setIcon(div_icon_b1fbe5d82cb8fa05a213c14ba9b7f0e9);
+            
+    
+            feature_group_0467476ac02d26695ed392f5185be98c.addTo(map_309b46329da047861467f50cbf1886af);
+        
+    
+            var circle_59f3735ef328a37b3c38dcf8f615043c = L.circle(
+                [25.783331, -100.585833],
+                {"bubblingMouseEvents": true, "color": "#cb181d", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#cb181d", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 900, "stroke": true, "weight": 3}
+            ).addTo(map_309b46329da047861467f50cbf1886af);
+        
+    
+            circle_59f3735ef328a37b3c38dcf8f615043c.bindTooltip(
+                `<div>
+                     MAX: NOROESTE2 (7.4%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_1efbbd2c3c20116e4f5d901bcf9125b2 = L.circle(
+                [25.791343, -100.078176],
+                {"bubblingMouseEvents": true, "color": "#2c7fb8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c7fb8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 900, "stroke": true, "weight": 3}
+            ).addTo(map_309b46329da047861467f50cbf1886af);
+        
+    
+            circle_1efbbd2c3c20116e4f5d901bcf9125b2.bindTooltip(
+                `<div>
+                     MIN: NORESTE3 (0.0%)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_854ef5d30ec82e40c37805de9b197b20_layers = {
+                base_layers : {
+                    "CartoDB Positron (Blanco)" : tile_layer_7ddd592b74e05832fb0128e826b7fe1d,
+                    "Stamen Toner" : tile_layer_eb56949b980aae03c63a790d8ac00124,
+                },
+                overlays :  {
+                    "Heatmap PM25" : feature_group_6b4603ee0aad6302aa6e9c494f0aff86,
+                    "Estaciones (c\u00edrculos por intensidad)" : feature_group_0467476ac02d26695ed392f5185be98c,
+                },
+            };
+            let layer_control_854ef5d30ec82e40c37805de9b197b20 = L.control.layers(
+                layer_control_854ef5d30ec82e40c37805de9b197b20_layers.base_layers,
+                layer_control_854ef5d30ec82e40c37805de9b197b20_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_309b46329da047861467f50cbf1886af);
+
+        
+</script>
+</html>
